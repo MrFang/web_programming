@@ -1,0 +1,7 @@
+.matrix {
+    display: inline-table;
+}
+
+.matrix tbody tr td {
+    border: 1px solid black;
+}
