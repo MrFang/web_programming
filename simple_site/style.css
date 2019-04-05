@@ -1,0 +1,19 @@
+.menu {
+    width: 20%;
+    border: 4px double black;
+    float: left;
+    margin-right: 3px;
+    height: 100%;
+}
+
+.menu__item {
+    display: block;
+}
+
+.index_item {
+    height: 100px;
+    width: 100px;
+    margin: 2px;
+    border: 1px solid black;
+    display: inline-block;
+}
