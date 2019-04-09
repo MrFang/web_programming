@@ -1,9 +1,10 @@
 .menu {
+    box-sizing: border-box;
     width: 20%;
     border: 4px double black;
     float: left;
     margin-right: 3px;
-    height: 100%;
+    height: 100vh;
 }
 
 .menu__item {
@@ -16,4 +17,14 @@
     margin: 2px;
     border: 1px solid black;
     display: inline-block;
+}
+
+.index {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content {
+    margin: 0 auto;
+    text-align: center;
 }
