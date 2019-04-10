@@ -4,7 +4,7 @@
     include('../common.php');
 
     session_start();
-    if (!isLogIn()) {
+    if (!isLogIn() || !in_array('add_article', $_SESSION['permissions'])) {
         header('Location: ../auth');
     }
 
