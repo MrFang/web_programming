@@ -3,6 +3,11 @@
     include('./lib.php');
     include('../common.php');
 
+    session_start();
+    if (!isLogIn() || !in_array('delete_article', $_SESSION['permissions'])) {
+        header('Location: ../auth');
+    }
+
     $conn = init_db();
 
     echo
@@ -12,28 +17,22 @@
             '<title>site</title>'.
             '<link rel="stylesheet"  href="style.css"/>'.
             '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'.
-            '<meta charset="utf8">'.
+            '<meta charset="utf-8">'.
         '</head>'.
         '<body>'
     ;
 
-    if(isset($_POST['action']) && $_POST['action'] == 'logout') {
-        session_abort();
-    };
-    
-    if (!isset($_POST['login'])){
-        render_auth_form();
-    } else {
+    if(isset($_POST['id'])) {
+        mysql_query('DELETE FROM content WHERE id='.$_POST['id'], $conn);
 
-        if (check_auth($_POST['login'], md5($_POST['password']), $conn)) {
-            get_permissions($conn);
-            echo '<meta http-equiv="refresh" content="0;URL=../">';
-        } else {
-            echo 'LOGIN FAILED';
-            echo '<meta http-equiv="refresh" content="1;URL=./">';
-        }
+        echo '<meta http-equiv="refresh" content="0;URL=./">';
+        
+    } else {
+        echo 'ERROR: Undefined id';
+        echo '<meta http-equiv="refresh" content="1;URL=./">';
     }
 
     echo '</body></html>';
+
     mysql_close($conn);
 ?>

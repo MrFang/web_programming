@@ -2,10 +2,9 @@
     header('Content-Type: text/html; charset=utf-8');
     include('./lib.php');
     include('../common.php');
-    include('../interface/lib.php');
 
     session_start();
-    if (!isLogIn()) {
+    if (!isLogIn() || !in_array('edit_article', $_SESSION['permissions'])) {
         header('Location: ../auth');
     }
 
@@ -23,14 +22,20 @@
         '<body>'
     ;
 
-    if (!isset($_GET['id'])) {
-        render_index_page($conn);
+    if(isset($_POST['name'])) {
+        mysql_query('UPDATE content SET text="'.$_POST['text'].'" WHERE id='.$_POST['id'], $conn);
+        mysql_query('UPDATE menu SET name="'.$_POST['name'].'" WHERE content_id='.$_POST['id'], $conn);
+
+        echo '<meta http-equiv="refresh" content="0;URL=./">';
+        
+    } else if (isset($_POST['id'])) {
+        render_edit_article_form($_POST['id'], $conn);
     } else {
-        render_content_page($_GET['id'], $conn);
+        echo 'ERROR: Undefined id';
+        echo '<meta http-equiv="refresh" content="1;URL=./">';
     }
 
-    render_buttons();
-
     echo '</body></html>';
-    mysql_close($conn)
+
+    mysql_close($conn);
 ?>

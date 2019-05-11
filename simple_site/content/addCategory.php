@@ -2,10 +2,9 @@
     header('Content-Type: text/html; charset=utf-8');
     include('./lib.php');
     include('../common.php');
-    include('../interface/lib.php');
 
     session_start();
-    if (!isLogIn()) {
+    if (!isLogIn() || !in_array('add_category', $_SESSION['permissions'])) {
         header('Location: ../auth');
     }
 
@@ -23,14 +22,25 @@
         '<body>'
     ;
 
-    if (!isset($_GET['id'])) {
-        render_index_page($conn);
+    if(isset($_POST['name'])) {
+        
+        $parent_id = $_POST['parent'] == 'NONE' ? 'NULL' : mysql_fetch_array(
+            mysql_query('SELECT id FROM menu WHERE name LIKE "'.$_POST['parent'].'"', $conn)
+        )['id'];
+        
+        mysql_query(
+            'INSERT INTO menu (parent_id, name) VALUES
+            ('.$parent_id.', "'.$_POST['name'].'")',
+            $conn
+        );
+
+        echo '<meta http-equiv="refresh" content="0;URL=./">';
+        
     } else {
-        render_content_page($_GET['id'], $conn);
+        render_add_category_form($conn);
     }
 
-    render_buttons();
-
     echo '</body></html>';
-    mysql_close($conn)
+
+    mysql_close($conn);
 ?>

@@ -23,25 +23,25 @@
     ;
 
     if(isset($_POST['text'])) {
-        mysql_query('INSERT INTO content (text) VALUES ('.$_POST['text'].')', $conn);
+        mysql_query('INSERT INTO content (text) VALUES ("'.$_POST['text'].'")', $conn);
         
         $content_id = mysql_fetch_array(
             mysql_query('SELECT MAX(id) AS id FROM content', $conn)
         )['id'];
-        $parrent_id = mysql_fetch_array(
+        $parent_id = mysql_fetch_array(
             mysql_query('SELECT id FROM menu WHERE name LIKE "'.$_POST['category'].'"', $conn)
         )['id'];
         
-        mysql_query('
-            INSERT INTO menu (parent_id, name, content_id) VALUES
-            ('.$parrent_id.', '.$_POST['name'].', '.$content_id.')',
+        mysql_query(
+            'INSERT INTO menu (parent_id, name, content_id) VALUES
+            ('.$parent_id.', "'.$_POST['name'].'", '.$content_id.')',
             $conn
         );
 
         echo '<meta http-equiv="refresh" content="0;URL=./">';
         
     } else {
-        render_add_form($conn);
+        render_add_article_form($conn);
     }
 
     echo '</body></html>';
