@@ -56,9 +56,9 @@
 
         if($content_id == '') {
             $item = 
-            '<a class="menu__item" href="./?id=0"><bold>'.
+            '<a class="menu__item" href="./?id=0"><strong>'.
                 $name.
-            '</bold></a>';
+            '</strong></a>';
         } else {
             $item = 
             '<a class="menu__item" href="./?id='.$content_id.'">'.
