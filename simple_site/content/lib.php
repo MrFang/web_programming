@@ -1,5 +1,5 @@
 <?php
-
+    
     function render_index_page($conn) {
         render_index($conn);
     }
@@ -56,12 +56,12 @@
 
         if($content_id == '') {
             $item = 
-            '<a class="menu__item" href="./?id=0"><strong>'.
+            '<a class="menu__item" href="'.BASE_URL.'0"><strong>'.
                 $name.
             '</strong></a>';
         } else {
             $item = 
-            '<a class="menu__item" href="./?id='.$content_id.'">'.
+            '<a class="menu__item" href="'.BASE_URL.$content_id.'">'.
                 $name.
             '</a>';
         }
@@ -96,7 +96,7 @@
         
         // Select category
         $form =
-        '<form class="add-article-form" action="./addArticle.php" method="POST">'.
+        '<form class="add-article-form" action="'.BASE_URL.'article/add" method="POST">'.
             'CATEGORY: <select name="category" required>'
         ;
 
@@ -120,7 +120,7 @@
         $res = mysql_query('SELECT name FROM menu WHERE content_id IS NULL', $conn);
 
         $form =
-        '<form class="add-category-form" action="./addCategory.php" method="POST">'.
+        '<form class="add-category-form" action="'.BASE_URL.'category/add" method="POST">'.
             'PARENT CATEGORY:
             <select name="parent" required>'.
                 '<option>NONE</option>'
@@ -141,7 +141,7 @@
         $res = mysql_query('SELECT name FROM menu WHERE content_id IS NULL', $conn);
 
         $form =
-        '<form class="add-category-form" action="./deleteCategory.php" method="POST">'.
+        '<form class="add-category-form" action="'.BASE_URL.'category/delete" method="POST">'.
             'CATEGORY: <select name="name" required>'
         ;
         
@@ -160,9 +160,9 @@
         $text = mysql_fetch_array(mysql_query('SELECT text FROM content WHERE id='.$id, $conn))['text'];
 
         $form =
-        '<form class="add-category-form" action="./editArticle.php" method="POST">'.
+        '<form class="add-category-form" action="'.BASE_URL.'article/edit" method="POST">'.
             'NAME: <input type="text" name="name" required value="'.$name.'"><br/>'.
-            'TEXT: <textarea name="text" reqired>'.$text.'</textarea>'.
+            'TEXT: <textarea name="text" reqired>'.$text.'</textarea><br/>'.
             '<input type="hidden" name="id" value="'.$id.'">'.
             '<input type="submit" value="Edit"/>'.
         '</form>';

@@ -1,12 +1,12 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
-    include('./lib.php');
     include('../common.php');
+    include('./lib.php');
     include('../interface/lib.php');
 
     session_start();
     if (!isLogIn()) {
-        header('Location: ../auth');
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'auth/">';
     }
 
     $conn = init_db();
@@ -16,7 +16,7 @@
     '<html>'.
         '<head>'.
             '<title>site</title>'.
-            '<link rel="stylesheet"  href="style.css"/>'.
+            '<link rel="stylesheet"  href="'.BASE_URL.'content/style.css"/>'.
             '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'.
             '<meta charset="utf-8">'.
         '</head>'.

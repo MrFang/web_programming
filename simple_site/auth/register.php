@@ -1,6 +1,6 @@
 <?php
-    include('./lib.php');
     include('../common.php');
+    include('./lib.php');
 
     $conn = init_db();
 

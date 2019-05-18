@@ -1,12 +1,12 @@
 <?php
     function render_auth_form() {
         echo 
-        '<form class="auth-form" action="./" method="POST">'.
+        '<form class="auth-form" action="'.BASE_URL.'auth/" method="POST">'.
             'LOGIN: <input type="text" name="login" required/><br/>'.
             'PASSWORD: <input type="password" name="password" autocomplete="off" required/><br/>'.
             '<input type="submit" value="Log In"/>'.
         '</form>'.
-        '<form action="./register.php">'.
+        '<form action="'.BASE_URL.'auth/register.php">'.
             '<input type="submit" value="Register">'.
         '</form>';
     }
@@ -42,11 +42,16 @@
 
     function render_register_form() {
         echo
-        '<form action="./register.php", method="POST">'.
+        '<form action="'.BASE_URL.'auth/register.php", method="POST">'.
             'LOGIN: <input type="text" name="login" required/><br/>'.
             'EMAIL: <input type="text" name="email" required/><br/>'.
             'PASSWORD: <input type="password" name="password" autocomplete="off" required/></br>'.
             '<input type="submit" value="Register">'.
         '</form>';
+    }
+
+    function logout() {
+        session_start();
+        session_destroy();
     }
 ?>

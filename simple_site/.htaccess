@@ -1,0 +1,12 @@
+RewriteEngine on
+
+RewriteRule ^main$ content/index.php
+RewriteRule ^auth/ auth/index.php
+
+RewriteRule ^([0-9]+)$ content/index.php?id=$1
+
+RewriteRule ^article/add$ content/addArticle.php
+RewriteRule ^article/delete$ content/deleteArticle.php
+RewriteRule ^category/add$ content/addCategory.php
+RewriteRule ^category/delete$ content/deleteCategory.php
+RewriteRule ^article/edit$ content/editArticle.php

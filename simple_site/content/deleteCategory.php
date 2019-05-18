@@ -18,12 +18,12 @@
     }
 
     header('Content-Type: text/html; charset=utf-8');
-    include('./lib.php');
     include('../common.php');
+    include('./lib.php');
 
     session_start();
     if (!isLogIn() || !in_array('delete_category', $_SESSION['permissions'])) {
-        header('Location: ../auth');
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'auth/">';
     }
 
     $conn = init_db();
@@ -46,7 +46,7 @@
         
         delete_category($id, $conn);
 
-        echo '<meta http-equiv="refresh" content="15;URL=./">';
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'">';
         
     } else {
         render_delete_category_form($conn);

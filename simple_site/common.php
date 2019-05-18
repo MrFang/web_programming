@@ -10,4 +10,6 @@
     function isLogIn() {
         return isset($_SESSION['login']) && isset($_SESSION['permissions']);
     }
+
+    define('BASE_URL', 'http://'.$_SERVER['HTTP_HOST'].'/PSTGU/2019/zolotukhin/simple_site/')
 ?>

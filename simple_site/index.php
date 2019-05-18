@@ -3,8 +3,8 @@
 
     session_start();
     if (!isLogIn()) {
-        header('Location: ./auth');
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'auth/">';
     }
 
-    header('Location: ./content');
+    echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'main">';
 ?>

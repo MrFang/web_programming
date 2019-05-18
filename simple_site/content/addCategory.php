@@ -1,11 +1,11 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
-    include('./lib.php');
     include('../common.php');
+    include('./lib.php');
 
     session_start();
     if (!isLogIn() || !in_array('add_category', $_SESSION['permissions'])) {
-        header('Location: ../auth');
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'auth/">';
     }
 
     $conn = init_db();
@@ -34,7 +34,7 @@
             $conn
         );
 
-        echo '<meta http-equiv="refresh" content="0;URL=./">';
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'">';
         
     } else {
         render_add_category_form($conn);

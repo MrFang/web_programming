@@ -1,11 +1,11 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
-    include('./lib.php');
     include('../common.php');
+    include('./lib.php');
 
     session_start();
     if (!isLogIn() || !in_array('delete_article', $_SESSION['permissions'])) {
-        header('Location: ../auth');
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'auth/">';
     }
 
     $conn = init_db();
@@ -25,11 +25,11 @@
     if(isset($_POST['id'])) {
         mysql_query('DELETE FROM content WHERE id='.$_POST['id'], $conn);
 
-        echo '<meta http-equiv="refresh" content="0;URL=./">';
+        echo '<meta http-equiv="refresh" content="0;URL='.BASE_URL.'">';
         
     } else {
         echo 'ERROR: Undefined id';
-        echo '<meta http-equiv="refresh" content="1;URL=./">';
+        echo '<meta http-equiv="refresh" content="1;URL='.BASE_URL.'">';
     }
 
     echo '</body></html>';
