@@ -1,7 +1,8 @@
 RewriteEngine on
 
 RewriteRule ^main$ content/index.php
-RewriteRule ^auth/ auth/index.php
+RewriteRule ^auth/$ auth/index.php
+RewriteRule ^register$ auth/register.php 
 
 RewriteRule ^([0-9]+)$ content/index.php?id=$1
 

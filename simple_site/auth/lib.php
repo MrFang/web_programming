@@ -6,7 +6,7 @@
             'PASSWORD: <input type="password" name="password" autocomplete="off" required/><br/>'.
             '<input type="submit" value="Log In"/>'.
         '</form>'.
-        '<form action="'.BASE_URL.'auth/register.php">'.
+        '<form action="'.BASE_URL.'register">'.
             '<input type="submit" value="Register">'.
         '</form>';
     }
